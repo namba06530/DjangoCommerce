@@ -1,0 +1,13 @@
+{% extends 'platecom/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<h1>Voici la liste des produits</h1>
+<ul>
+  {% for produit in liste_des_produits %}
+    <li>{{ produit.nom }}, {{ produit.description }}, {{ produit.prix }}€</li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}

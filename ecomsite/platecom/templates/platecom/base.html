@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>DjangoCommerce</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"></script>
+</head>
+<body>
+
+        <section class="hero is-info">
+            <div class="hero-body">
+                <nav class="navbar-menu">
+                    <div class="navbar-start">
+                        <div>
+                            <p class="title"><a href="{% url 'platecom:index' %}">DjangoCommerce</a></p>
+                            <p class="subtitle">Plateforme eCommerce générique</p>
+                        </div>
+                    </div>
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                {% if user.is_authenticated %}
+                                <a href="/platecom/logout" class="button is-light">
+                                    DÉCONNEXION ({{ user.username }})
+                                </a>
+                            </div>
+                            <div class="buttons">
+                                {% else %}
+                                <a href="/platecom/login" class="button is-light">
+                                    CONNEXION
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </section>
+
+        <section class="mt-1">
+            <nav class="navbar is-info">
+                <div id="navbarBasic" class="navbar-menu">
+                    <div class="navbar-start">
+                        <div class="navbar-item has-dropdown is-hoverable">
+                          <a class="navbar-link">
+                            Tous nos produits
+                          </a>
+                          <div class="navbar-dropdown">
+                            <a class="navbar-item">
+                                Catégorie 1
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Catégorie 2
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                            Catégorie 3
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Catégorie 4
+                            </a>
+                          </div>
+                        </div>
+                        <a class="navbar-item">
+                            Nouveautés
+                        </a>
+                        <a class="navbar-item">
+                            Promotions
+                        </a>
+                        <a class="navbar-item">
+                            Services
+                        </a>
+                        <a class="navbar-item">
+                            Besoin d'aide
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </section>
+
+        <section class="hero-body">
+            <div class="content has-text-centered">
+                {% block content %}{% endblock content %}
+            </div>
+        </section>
+
+        <section class="hero is-info">
+            <div class="hero-foot">
+                <div class="content has-text-centered">
+                    <p class="mt-5 mb-5">
+                        <strong>Plateforme DjangoCommerce</strong> by <a href="https://www.og-informatique.fr">Olivier Grellety</a><br>
+                        The source code is <strong>Open Source :-)</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+</body>
+</html>
