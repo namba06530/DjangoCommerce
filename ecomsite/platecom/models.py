@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 
 class Commande(models.Model):
     commande_id = models.SmallAutoField(primary_key=True)
@@ -24,14 +24,28 @@ class Panier(models.Model):
 class Produit(models.Model):
     produit_id = models.SmallAutoField(primary_key=True)
     nom = models.CharField(max_length=50)
-    description = models.CharField(max_length=500, blank=True, null=True)
+    slug = models.SlugField(max_length=50)
+    description = models.TextField(blank=True, null=True)
     categorie = models.CharField(max_length=50, blank=True, null=True)
-    prix = models.DecimalField(max_digits=7, decimal_places=2)
+    prix = models.FloatField(default=0.0)
     fournisseur = models.CharField(max_length=50, blank=True, null=True)
+    stock = models.IntegerField(default=0)
+    thumbnail = models.ImageField(upload_to="products", blank=True, null=True)
+    """
+    - la quantité en stock
+    - Image
+    - prix = models.DecimalField(max_digits=7, decimal_places=2)
+    - description = models.CharField(max_length=500, blank=True, null=True)
+    """
 
     def __str__(self):
         template = '{0.nom}'
         return template.format(self)
+
+
+    def get_absolute_url(self):
+        return reverse("platecom:produit", kwargs={"slug": self.slug})
+
 
     class Meta:
         managed = True

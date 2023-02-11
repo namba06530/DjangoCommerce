@@ -1,26 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>DjangoCommerce</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"></script>
-</head>
-<body>
-<section class="hero is-info">
-    <div class="hero-body">
-        <nav class="navbar-menu">
-            <div class="navbar-start">
-                <div>
-                    <p class="title"><a href="{% url 'platecom:index' %}">DjangoCommerce</a></p>
-                    <p class="subtitle">Plateforme eCommerce générique</p>
-                </div>
-            </div>
-        </nav>
-    </div>
-</section>
+{% extends 'platecom/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
 <form method="POST" action="{% url 'platecom:login' %}">
     {% csrf_token %}
-    <div class="container has-text-centered mt-6">
+    <div class="container has-text-centered mt-1">
         <p class="title">
             Identifiez-vous:
         </p>
@@ -28,9 +13,6 @@
             <div class="column is-half is-offset-one-quarter">
 
                 <div class="box mx-6 has-text-left">
-                  <p class="subtitle has-text-centered">
-                    Déjà client ?
-                  </p>
                     <div class="block">
                         <label class="label">{{ form.username.label_tag }}</label>
                         <input class="input" type="text" placeholder="Votre adresse mail" name="username"></input>
@@ -51,5 +33,6 @@
         </div>
     </div>
 </form>
-</body>
-</html>
+
+
+{% endblock content %}

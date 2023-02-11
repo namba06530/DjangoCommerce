@@ -1,0 +1,17 @@
+{% extends 'platecom/base.html' %}
+{% block content %}
+
+
+
+<h2>{{ produit.nom }}</h2>
+<h3>{{ produit.prix }}€</h3>
+{% if produit.thumbnail %}
+    <figure class="image">
+        <img src="{{ produit.thumbnail.url }}" alt="{{ produit.nom }}" style="max-width: 250px;">
+    </figure>
+{% endif %}
+<p>{{ produit.description }}</p>
+<p>Stock: {{ produit.stock }}</p>
+
+
+{% endblock content %}

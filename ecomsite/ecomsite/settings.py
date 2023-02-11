@@ -141,3 +141,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('bulma',)
 CRISPY_TEMPLATE_PACK = 'bulma'
+
+MEDIA_URL = "platecom/media/"
+MEDIA_ROOT = BASE_DIR / "platecom/media"

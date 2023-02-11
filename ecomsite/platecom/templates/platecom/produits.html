@@ -4,10 +4,39 @@
 
 
 <h1>Voici la liste des produits</h1>
-<ul>
-  {% for produit in liste_des_produits %}
-    <li>{{ produit.nom }}, {{ produit.description }}, {{ produit.prix }}€</li>
-  {% endfor %}
-</ul>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Produit</th>
+      <th>Description</th>
+      <th>Prix</th>
+      <th>Panier</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for produit in liste_des_produits %}
+        <tr>
+          <td>
+            {% if produit.thumbnail %}
+            <figure class="image is-64x64">
+              <img src="{{ produit.thumbnail.url }}" alt="{{ produit.nom }}">
+            </figure>
+            {% endif %}
+          </td>
+          <td>{{ produit.nom }}</td>
+          <td>{{ produit.description }}</td>
+          <td>{{ produit.prix }} €</td>
+          <td>
+            <form action="{% url 'platecom:add_to_cart' produit.produit_id %}" method="post">
+              {% csrf_token %}
+              <input type="submit" value="Ajouter au panier" class="button is-info is-light is-small">
+            </form>
+          </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock content %}

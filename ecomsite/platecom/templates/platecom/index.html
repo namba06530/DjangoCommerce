@@ -7,8 +7,20 @@
     Bienvenue sur la page d'accueil !
 </p>
 <p class="subtitle">
-    Plateforme ecommerce en cours de développement, nous revenons très vite !
+    Plateforme ecommerce en cours de développement...
 </p>
-
+{% for produit in liste_produits %}
+    <h2>{{ produit.nom }}</h2>
+    {% if produit.thumbnail %}
+    <figure class="image">
+         <a href="{{ produit.get_absolute_url }}">
+            <img src="{{ produit.thumbnail.url }}" alt="{{ produit.nom }}" style="max-width: 250px;">
+         </a>
+    </figure>
+    {% endif %}
+    {% if produit.slug %}
+    <a href="{{ produit.get_absolute_url }}">Voir détails</a>
+    {% endif %}
+{% endfor %}
 
 {% endblock content %}
