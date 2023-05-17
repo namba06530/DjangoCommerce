@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from .secrets import SECRET_KEY, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nj7_)^h&+vee^s^biu45gng%gbn0&(znhs394b0go_d9ecvkh!'
+SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,18 +83,18 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'django_platecom_db',
-        'USER': 'dev',
-        'PASSWORD': 'dev',
-        'HOST': '127.0.0.1',
-        'PORT': '5452',
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     },
     'plateforme_ecommerce': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'plateforme_ecommerce',
-        'USER': 'dev',
-        'PASSWORD': 'dev',
-        'HOST': '127.0.0.1',
-        'PORT': '5452',
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
 

@@ -6,7 +6,6 @@
     <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"></script>
 </head>
 <body>
-
         <section class="hero is-info">
             <div class="hero-body">
                 <nav class="navbar-menu">
@@ -19,15 +18,15 @@
                     <div class="navbar-end">
                         <div class="navbar-item">
                             <a class="navbar-item">
-                                <a href="/platecom/panier/" class="button is-info is-light mx-1">Mon Panier</a>
+                                <a href="{% url 'platecom:panier' %}" class="button is-info is-light mx-1">Mon Panier ({{ user.panier.produit.count }})</a>
                             </a>
                             <div class="buttons">
                                 {% if user.is_authenticated %}
-                                <a href="/platecom/logout" class="button is-info is-light">
+                                <a href="{% url 'platecom:logout' %}" class="button is-info is-light">
                                     Se déconnecter ({{ user.username }})
                                 </a>
                                 {% else %}
-                                <a href="/platecom/login" class="button is-info is-light ml-1">
+                                <a href="{% url 'platecom:login' %}" class="button is-info is-light ml-1">
                                     Se connecter
                                 </a>
                                 <a href="{% url 'platecom:signup' %}" class="button is-info is-light">
@@ -100,6 +99,5 @@
                 </div>
             </div>
         </section>
-
 </body>
 </html>

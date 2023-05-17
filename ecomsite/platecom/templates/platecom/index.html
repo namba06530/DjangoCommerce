@@ -20,6 +20,12 @@
     {% endif %}
     {% if produit.slug %}
     <a href="{{ produit.get_absolute_url }}">Voir détails</a>
+    <td>
+        <form action="{% url 'platecom:add_to_cart' produit.produit_id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Ajouter au panier" class="button is-info is-small">
+        </form>
+    </td>
     {% endif %}
 {% endfor %}
 

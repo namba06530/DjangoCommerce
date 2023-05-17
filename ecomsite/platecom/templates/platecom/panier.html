@@ -3,13 +3,13 @@
 
 
 <h1>Voici votre panier</h1>
-<h2>Panier</h2>
 {% if message %}
-  <p>{{ message }}</p>
+  <h2>{{ message }}</h2>
 {% else %}
   <table>
     <thead>
       <tr>
+        <th>Image</th>
         <th>Produit</th>
         <th>Quantité</th>
         <th>Prix</th>
@@ -21,15 +21,24 @@
         {% for produit in produits %}
           {% if produit.produit_id == article.produit_id %}
             <tr>
+              <td>
+                {% if produit.thumbnail %}
+                  <figure class="image is-64x64">
+                    <img src="{{ produit.thumbnail.url }}" alt="{{ produit.nom }}">
+                  </figure>
+                 {% endif %}
+              </td>
               <td>{{ produit.nom }}</td>
               <td>{{ article.quantite }}</td>
-              <td>{{ produit.prix }}</td>
-              <td>{% widthratio produit.prix 1 article.quantite %}</td>
+              <td>{{ produit.prix | floatformat:2 }}€</td>
+              <td>{{ article.total | floatformat:2 }}€</td>
+
               <td></td>
             </tr>
           {% endif %}
         {% endfor %}
       {% endfor %}
+      <a href="{% url 'platecom:delete-panier' %}">Supprimer le panier</a>
     </tbody>
   </table>
 {% endif %}

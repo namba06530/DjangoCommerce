@@ -30,19 +30,19 @@ def search(request):
     if form.is_valid():
         nom = form.cleaned_data['nom']
         produits = Produit.objects.filter(nom__icontains=nom)
-
     else:
         form = ProduitSearchForm()
-
     return render(request, 'platecom/search.html', {'form': form, 'produits': produits})
 
 
 def add_to_cart(request, produit_id):
     produit = get_object_or_404(Produit, produit_id=produit_id)
     panier = request.session.get('panier', [])
+    total = produit.prix
     for article in panier:
         if article['produit_id'] == produit_id:
             article['quantite'] += 1
+            article['total'] = article['quantite'] * produit.prix
             request.session['panier'] = panier
             return redirect(request.META.get('HTTP_REFERER'))
     panier.append({
@@ -50,6 +50,7 @@ def add_to_cart(request, produit_id):
         'nom': produit.nom,
         'quantite': 1,
         'prix': str(produit.prix),
+        'total': total
     })
     request.session['panier'] = panier
     # Rediriger vers la page précédente
@@ -57,18 +58,22 @@ def add_to_cart(request, produit_id):
 
 
 def panier(request):
-
     # Récupérer le panier stocké dans la session
     panier = request.session.get('panier', [])
-
     # Récupérer les produits de la base de données
     produits = Produit.objects.filter(produit_id__in=[article['produit_id'] for article in panier])
-
     if not panier:
         message = "Le panier est vide."
         return render(request, 'platecom/panier.html', {'message': message})
     else:
         return render(request, 'platecom/panier.html', {'panier': panier, 'produits': produits})
+
+
+def delete_panier(request):
+    panier = request.session.get('panier', [])
+    if panier:
+        request.session.pop('panier', None)
+    return redirect('platecom:panier')
 
 
 def signup(request):

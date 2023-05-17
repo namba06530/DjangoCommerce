@@ -27,11 +27,11 @@
           </td>
           <td>{{ produit.nom }}</td>
           <td>{{ produit.description }}</td>
-          <td>{{ produit.prix }} €</td>
+          <td>{{ produit.prix | floatformat:2 }}€</td>
           <td>
             <form action="{% url 'platecom:add_to_cart' produit.produit_id %}" method="post">
               {% csrf_token %}
-              <input type="submit" value="Ajouter au panier" class="button is-info is-light is-small">
+              <input type="submit" value="Ajouter au panier" class="button is-info is-small">
             </form>
           </td>
         </tr>
